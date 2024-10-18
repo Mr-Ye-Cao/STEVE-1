@@ -7,13 +7,13 @@
 Shalev Lifshitz*, Keiran Paster*, Harris Chan†, Jimmy Ba, Sheila McIlraith
 
 [Project Page](https://sites.google.com/view/steve-1) | [ArXiv](https://arxiv.org/abs/2306.00937)
-| [PDF](https://arxiv.org/pdf/2306.00937.pdf) | Colab (coming soon...)
+| [PDF](https://arxiv.org/pdf/2306.00937.pdf)
 
 <img src="data/../images/STEVE-collage-background-blank.png" width="100%" />
 
 ## Abstract
 
-Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces an instruction-tuned Video Pretraining (VPT) model for Minecraft called STEVE-1, demonstrating that the unCLIP approach, utilized in DALL•E 2, is also effective for creating instruction-following sequential decision-making agents. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, bypassing the need for costly human text annotations. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 **costs just $60 to train and can follow a wide range of short-horizon open-ended text and visual instructions in Minecraft**. STEVE-1 sets a new bar for open-ended instruction following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.
+Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces a methodology, inspired by unCLIP, for instruction-tuning generative models of behavior without relying on a large dataset of instruction-labeled trajectories. Using this methodology, we create an instruction-tuned Video Pretraining (VPT) model called STEVE-1, which can follow short-horizon open-ended text and visual instructions in Minecraft™. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, reducing the need for costly human text annotations, and all for only $60 of compute. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 sets a new bar for open-ended instruction-following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines and robustly completing 12 of 13 tasks in our early-game evaluation suite. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.
 
 ### Directory Structure:
 
@@ -42,8 +42,9 @@ We recommend running on linux using a conda environment, with python 3.10.
 3. Install MineRL: `pip install git+https://github.com/minerllabs/minerl@v1.0.1`
    - See [MineRL Installation](https://minerl.readthedocs.io/en/latest/tutorials/index.html) for more details on how to setup MineRL
 4. Install VPT requirements: `pip install gym==0.19 gym3 attrs opencv-python`
-5. Install additional requirements: `pip install gdown tqdm accelerate==0.18.0 wandb`
-6. Install `steve1` locally with: `pip install -e .`
+   - Note: At the time of writing, MineDojo and VPT require different versions of gym. Please use the gym version required by VPT (gym==0.19). If the installation steps are run in the order listed here, the correct gym version will be installed at the end of setup (since VPT requirements are installed after MineDojo).
+6. Install additional requirements: `pip install gdown tqdm accelerate==0.18.0 wandb`
+7. Install `steve1` locally with: `pip install -e .`
 
 ### Running on a headless server
 
